@@ -40,7 +40,7 @@
           width: 18rem;
           height: 28rem;
           display: block;
-          margin: 0 auto;
+          margin: 10rem auto;
           text-align: center;
           background: #fff url(http://i.imgur.com/zVFd45k.jpg) 0 0 no-repeat;
 
@@ -83,6 +83,56 @@
           -ms-transform: rotate(351deg); /* IE 9 */
           -webkit-transform: rotate(351deg); /* Chrome, Safari, Opera */
           transform: rotate(351deg);
+        }
+
+        .futura-cursive-subtitle{
+          font-family: Futura, sans-serif;
+          text-transform: uppercase;
+          font-size: 1rem;
+          font-style: italic;
+          font-weight: bold;
+          color: rgb(240,230,0);
+
+          /*rotate*/
+          -ms-transform: rotate(351deg); /* IE 9 */
+          -webkit-transform: rotate(351deg); /* Chrome, Safari, Opera */
+          transform: rotate(351deg);
+        }
+
+
+
+        /*columns*/
+        @media (min-width: 34em) {
+            .card-columns {
+                -webkit-column-count: 1;
+                -moz-column-count: 1;
+                column-count: 1;
+                margin:10rem;
+            }
+        }
+
+        @media (min-width: 48em) {
+            .card-columns {
+                -webkit-column-count: 3;
+                -moz-column-count: 3;
+                column-count: 3;
+            }
+        }
+
+        @media (min-width: 62em) {
+            .card-columns {
+                -webkit-column-count: 4;
+                -moz-column-count: 4;
+                column-count: 4;
+            }
+        }
+
+        @media (min-width: 75em) {
+            .card-columns {
+                -webkit-column-count: 5;
+                -moz-column-count: 5;
+                column-count: 5;
+            }
         }
     </style>
 </head>
@@ -131,14 +181,14 @@
     <div class="card-columns">
     {block:Posts}
 
-
-
     <article>
-
+      <div class="futura-cursive-subtitle">
+        <p>{PostType}</p>
+      </div>
         {block:Text}
         <!-- card  -->
         <div class="card">
-            <div class="card-block">
+            <div class="post card-block text">
                 {block:Title}
                 <h3><a href="{Permalink}">{Title}</a></h3>
                 {/block:Title}
@@ -149,50 +199,67 @@
         </div><!-- end card -->
         {/block:Text}
 
-        {block:Text}
-        <div class="post text">
-            {block:Title}
-            <h3><a href="{Permalink}">{Title}</a></h3> {/block:Title}{Body}
-        </div>
-        {/block:Text}
         {block:Photo}
-        <div class="post photo">
+        <!-- card  -->
+        <div class="card">
+        <div class="post card-block photo">
             <img src="{PhotoURL-500}" alt="{PhotoAlt}" /> {block:Caption}
             <div class="caption">{Caption}</div>
             {/block:Caption}
         </div>
+        </div><!-- end card -->
         {/block:Photo}
+
         {block:Panorama}
-        <div class="post panorama">
+
+        <!-- card  -->
+        <div class="card">
+        <div class="post card-block panorama">
             {LinkOpenTag}
             <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}" />{LinkCloseTag} {block:Caption}
             <div class="caption">{Caption}</div>
             {/block:Caption}
         </div>
+        </div><!-- end card -->
         {/block:Panorama}
+
         {block:Photoset}
-        <div class="post photoset">
+        <!-- card  -->
+        <div class="card">
+        <div class="post card-block photoset">
             {Photoset-500} {block:Caption}
             <div class="caption">{Caption}</div>
             {/block:Caption}
         </div>
+        </div><!-- end card -->
         {/block:Photoset}
+
         {block:Quote}
-        <div class="post quote">
+        <!-- card  -->
+        <div class="card">
+        <div class="post card-block quote">
             &#8220;{Quote}&#8221; {block:Source}
             <div class="source">{Source}</div>
             {/block:Source}
         </div>
+        </div><!-- end card -->
         {/block:Quote}
+
         {block:Link}
-        <div class="post link">
+        <!-- card  -->
+        <div class="card">
+        <div class="post card-block link">
             <a href="{URL}" class="link" {Target}>{Name}</a> {block:Description}
             <div class="description">{Description}</div>
             {/block:Description}
         </div>
+        </div><!-- end card -->
         {/block:Link}
+
         {block:Chat}
-        <div class="post chat">
+        <!-- card  -->
+        <div class="card">
+        <div class="post card-block chat">
             {block:Title}
             <h3><a href="{Permalink}">{Title}</a></h3> {/block:Title}
             <ul class="chat">
@@ -204,27 +271,42 @@
                 {/block:Lines}
             </ul>
         </div>
+        </div><!-- end card -->
         {/block:Chat}
+
         {block:Video}
-        <div class="post video">
+        <!-- card  -->
+        <div class="card">
+        <div class="post card-block video">
             {Video-500} {block:Caption}
             <div class="caption">{Caption}</div>
             {/block:Caption}
         </div>
+        </div><!-- end card -->
         {/block:Video}
+
         {block:Audio}
-        <div class="post audio">
+        <!-- card  -->
+        <div class="card">
+        <div class="post card-block audio">
             {AudioEmbed} {block:AudioPlayer}{AudioPlayer}{/block:AudioPlayer} {block:Caption}
             <div class="caption">{Caption}</div>
             {/block:Caption} {block:PlayCount}
             <span class="play-count">{PlayCountWithLabel}</span> {/block:PlayCount}
         </div>
+        </div><!-- end card -->
         {/block:Audio}
+
         {block:Answer}
+        <!-- card  -->
+        <div class="card">
         <div class="answer">
             <img src="{AskerPortraitURL-40}">{Asker} {Question} {Answer}
         </div>
+        </div><!-- end card -->
         {/block:Answer}
+
+
         {block:PermalinkPage}
         {block:HasTags}
         <ul class="tags">
