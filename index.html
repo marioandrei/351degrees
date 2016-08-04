@@ -127,45 +127,71 @@
 </header>
 
 <section class="posts {TagsAsClasses}">
+
+    <div class="card-columns">
     {block:Posts}
+
+
+
     <article>
+
+        {block:Text}
+        <!-- card  -->
+        <div class="card">
+            <div class="card-block">
+                {block:Title}
+                <h3><a href="{Permalink}">{Title}</a></h3>
+                {/block:Title}
+
+                <p class="card-text">{Body}</p>
+
+            </div>
+        </div><!-- end card -->
+        {/block:Text}
+
         {block:Text}
         <div class="post text">
             {block:Title}
             <h3><a href="{Permalink}">{Title}</a></h3> {/block:Title}{Body}
         </div>
-        {/block:Text} {block:Photo}
+        {/block:Text}
+        {block:Photo}
         <div class="post photo">
             <img src="{PhotoURL-500}" alt="{PhotoAlt}" /> {block:Caption}
             <div class="caption">{Caption}</div>
             {/block:Caption}
         </div>
-        {/block:Photo} {block:Panorama}
+        {/block:Photo}
+        {block:Panorama}
         <div class="post panorama">
             {LinkOpenTag}
             <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}" />{LinkCloseTag} {block:Caption}
             <div class="caption">{Caption}</div>
             {/block:Caption}
         </div>
-        {/block:Panorama} {block:Photoset}
+        {/block:Panorama}
+        {block:Photoset}
         <div class="post photoset">
             {Photoset-500} {block:Caption}
             <div class="caption">{Caption}</div>
             {/block:Caption}
         </div>
-        {/block:Photoset} {block:Quote}
+        {/block:Photoset}
+        {block:Quote}
         <div class="post quote">
             &#8220;{Quote}&#8221; {block:Source}
             <div class="source">{Source}</div>
             {/block:Source}
         </div>
-        {/block:Quote} {block:Link}
+        {/block:Quote}
+        {block:Link}
         <div class="post link">
             <a href="{URL}" class="link" {Target}>{Name}</a> {block:Description}
             <div class="description">{Description}</div>
             {/block:Description}
         </div>
-        {/block:Link} {block:Chat}
+        {/block:Link}
+        {block:Chat}
         <div class="post chat">
             {block:Title}
             <h3><a href="{Permalink}">{Title}</a></h3> {/block:Title}
@@ -178,24 +204,29 @@
                 {/block:Lines}
             </ul>
         </div>
-        {/block:Chat} {block:Video}
+        {/block:Chat}
+        {block:Video}
         <div class="post video">
             {Video-500} {block:Caption}
             <div class="caption">{Caption}</div>
             {/block:Caption}
         </div>
-        {/block:Video} {block:Audio}
+        {/block:Video}
+        {block:Audio}
         <div class="post audio">
             {AudioEmbed} {block:AudioPlayer}{AudioPlayer}{/block:AudioPlayer} {block:Caption}
             <div class="caption">{Caption}</div>
             {/block:Caption} {block:PlayCount}
             <span class="play-count">{PlayCountWithLabel}</span> {/block:PlayCount}
         </div>
-        {/block:Audio} {block:Answer}
+        {/block:Audio}
+        {block:Answer}
         <div class="answer">
             <img src="{AskerPortraitURL-40}">{Asker} {Question} {Answer}
         </div>
-        {/block:Answer} {block:PermalinkPage} {block:HasTags}
+        {/block:Answer}
+        {block:PermalinkPage}
+        {block:HasTags}
         <ul class="tags">
             {block:Tags}
             <li><a href="{TagURL}">{Tag}</a></li>
@@ -210,10 +241,15 @@
         <div class="notes">
             {PostNotes}
         </div>
-        {/block:PostNotes} {/block:PermalinkPage} {block:TagPage}
-        <h2>Posts tagged "{Tag}"</h2> {/block:TagPage}
+        {/block:PostNotes}
+        {/block:PermalinkPage}
+        {block:TagPage}
+        <h2>Posts tagged "{Tag}"</h2>
+        {/block:TagPage}
     </article>
     {/block:Posts}
+    </div> <!-- end card-columns -->
+
 </section>
 
 <footer>
