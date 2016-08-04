@@ -35,6 +35,12 @@
           background-color: rgb(160,160,160);
         }
 
+        .rotated-351-degrees{
+          /*rotate*/
+          -ms-transform: rotate(351deg); /* IE 9 */
+          -webkit-transform: rotate(351deg); /* Chrome, Safari, Opera */
+          transform: rotate(351deg);
+        }
 
         .cover{
           width: 18rem;
@@ -77,13 +83,8 @@
           font-style: italic;
           font-weight: bold;
           color: rgb(240,230,0);
-
-
-          /*rotate*/
-          -ms-transform: rotate(351deg); /* IE 9 */
-          -webkit-transform: rotate(351deg); /* Chrome, Safari, Opera */
-          transform: rotate(351deg);
         }
+
 
         .futura-cursive-subtitle{
           font-family: Futura, sans-serif;
@@ -92,11 +93,6 @@
           font-style: italic;
           font-weight: bold;
           color: rgb(240,230,0);
-
-          /*rotate*/
-          -ms-transform: rotate(351deg); /* IE 9 */
-          -webkit-transform: rotate(351deg); /* Chrome, Safari, Opera */
-          transform: rotate(351deg);
         }
 
 
@@ -167,7 +163,7 @@
     </nav>
     <!-- search form -->
     <div class="jumbotron cover">
-        <div class="title-box">
+        <div class="title-box rotated-351-degrees">
             <div class="futura-cursive-title">{Title}</div>
         </div>
         {block:Description}
@@ -182,8 +178,8 @@
     {block:Posts}
 
     <article>
-      <div class="futura-cursive-subtitle">
-        <p>{Date}{PostType}</p>
+      <div class="rotated-351-degrees">
+        <p class="futura-cursive-subtitle">{Date}{PostType}</p>
       </div>
         {block:Text}
         <!-- card  -->
