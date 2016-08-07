@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width">
     <meta name="text:Google Analytics ID" content="" />
     <meta name="text:Google Web Font name" content="" />
+    <meta name="text:lastfmusername" content="" />
+    <meta name="text:numberofrecords" content="" />
 
     <title>{Title} {block:PostSummary}/ {PostSummary}{/block:PostSummary}
         {block:SearchPage}{lang:Search results for SearchQuery} {/block:SearchPage}
@@ -118,7 +120,11 @@
          box-shadow: 1 3px 3px #58a2b2;
         }
 
-
+        aside {
+          float: right;
+          margin: 0 1.5%;
+          width: 30%;
+        }
 
 
         /*columns*/
@@ -141,19 +147,101 @@
 
         @media (min-width: 62em) {
             .card-columns {
-                -webkit-column-count: 4;
-                -moz-column-count: 4;
-                column-count: 4;
+                -webkit-column-count: 3;
+                -moz-column-count: 3;
+                column-count: 3;
             }
         }
 
-        @media (min-width: 75em) {
+        @media (min-width: 128rem) {
             .card-columns {
                 -webkit-column-count: 5;
                 -moz-column-count: 5;
                 column-count: 5;
             }
         }
+
+        
+        /* LAST FM======================= */
+
+        #lastfm {
+
+            padding-top: 10px;
+            margin: 0 auto;
+            text-align: center;
+          }
+
+        #lastfmrecords {
+
+            padding-left: 16px;
+            /* background-color: #E21303; */ /* last fm red */
+          }
+
+          #lastfmrecords p {
+              font-size: 1.2em;
+              font-weight: bold;
+
+
+            }
+
+          #lastfmrecords img {
+
+            }
+
+          #lastfmrecords ol, #lastfmrecords ol li, #lastfmrecords ol li a, #lastfmrecords ol li img {
+              margin: 0;
+              padding: 0;
+              list-style: none;
+              border: 0;
+              text-decoration: none;
+            }
+
+            #lastfmrecords ol li {
+                margin: 5px 5px 5px 0;
+                float: left;
+                position: relative;
+              }
+
+              #lastfmrecords ol li a {
+                  display: block;
+                  position: relative;
+                  float: left;
+                  width: 80px;
+                  height: 80px;
+                  text-indent: -1000em;
+                  overflow: hidden;
+                  z-index: 1;
+                }
+
+              #lastfmrecords ol li img {
+                  position: absolute;
+                  width: 80px;
+                  height: 80px;
+                  border: 0;
+                }
+
+
+
+        /* Vinyl */
+
+            #lastfmrecords ol li.vinyl img {
+                width: 72px;
+                height: 72px;
+                left: 2px;
+                top: 1px;
+            }
+
+            #lastfmrecords ol li.vinyl a {
+                background: url(http://static.tumblr.com/oxkdmfz/qrxobeiqt/vinyl.png) 0 0 no-repeat;
+                width: 96px;
+                height: 76px;
+            }
+
+            #lastfmrecords ol li.vinyl { 
+              background: url(http://static.tumblr.com/oxkdmfz/q7Uobeiqt/vinyl_insert.gif) 2px 1px no-repeat 
+            }
+
+
     </style>
 </head>
 
@@ -223,7 +311,7 @@
         <!-- card  -->
         <div class="card">
         <div class="post card-block photo">
-            <img src="{PhotoURL-500}" alt="{PhotoAlt}" /> {block:Caption}
+            <img src="{PhotoURL-500}" alt="{PhotoAlt}" class="img-fluid img-rounded " /> {block:Caption}
             <div class="caption">{Caption}</div>
             {/block:Caption}
         </div>
@@ -353,7 +441,13 @@
     </div> <!-- end card-columns -->
 
 </section>
-
+<aside>
+  <!-- Start of last.fm discs  -->
+  <div id="lastfm">
+    <div id="lastfmrecords">
+    </div>
+  </div>
+</aside>
 <footer>
     <ul>
         {block:PreviousPage}
@@ -385,6 +479,25 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" integrity="sha384-ux8v3A6CPtOTqOzMKiuo3d/DomGaaClxFYdCu2HPMBEkf6x2xiDyJ7gkXU0MWwaD" crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="http://static.tumblr.com/oxkdmfz/yBgobeilp/lastfm.records.3.1.js"></script>
+    <script type="text/javascript">
+    jQuery(document).ready( function() {
+      var _config = {
+        // last.fm username
+        username: '{text:lastfmusername}',
+        // number of images to show
+        count: {text:numberofrecords},
+        // period to get last.fm data from
+        period: '7day',
+        // when to get new data from last.fm (in minutes)
+        refresh: 1,
+        // difference between your timezone and GMT.
+        offset: 1
+    };
+   lastFmRecords.init(_config);
+   });
+  </script>
 </body>
 
 </html>
