@@ -35,6 +35,7 @@
         body {
           //background-color: rgb(160,160,160);
           background-color: #add0d7;
+          //overflow-x: hidden;
         }
 
         .rotated-351-degrees{
@@ -121,9 +122,9 @@
         }
 
         aside {
-          float: right;
-          margin: 0 1.5%;
-          width: 30%;
+          //float: right;
+          margin: 1rem;
+          //width: 30%;
         }
 
 
@@ -161,7 +162,6 @@
             }
         }
 
-        
         /* LAST FM======================= */
 
         #lastfm {
@@ -241,224 +241,333 @@
               background: url(http://static.tumblr.com/oxkdmfz/q7Uobeiqt/vinyl_insert.gif) 2px 1px no-repeat 
             }
 
+        /* collapsed sidebar*/
 
+
+        /* Toggle Styles */
+
+        #wrapper {
+            padding-left: 0;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+
+        #wrapper.sidebar-activated {
+            padding-left: 250px;
+        }
+
+        #sidebar-wrapper {
+            z-index: 1000;
+            position: fixed;
+            left: 250px;
+            width: 0;
+            height: 100%;
+            margin-left: -250px;
+            overflow-y: auto;
+            //background: #000;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+
+        #wrapper.sidebar-activated #sidebar-wrapper {
+            width: 250px;
+        }
+
+        #main-content {
+            width: 100%;
+            position: absolute;
+            //padding: 15px;
+        }
+
+        #wrapper.sidebar-activated #main-content {
+            position: absolute;
+            margin-right: -250px;
+        }
+
+        /* sidebar */
+
+
+        /* web view */
+
+        @media(min-width:768px) {
+            #wrapper {
+                padding-left: 250px;
+            }
+
+            #wrapper.sidebar-activated {
+                padding-left: 0;
+            }
+
+            #sidebar-wrapper {
+                width: 250px;
+            }
+
+            #wrapper.sidebar-activated #sidebar-wrapper {
+                width: 0;
+            }
+
+            #main-content {
+                //padding: 20px;
+                position: relative;
+            }
+
+            #wrapper.sidebar-activated #main-content {
+                position: relative;
+                margin-right: 0;
+            }
+        }
     </style>
 </head>
 
 
 <body>
-<header>
-    <!-- navbar -->
-    <nav class="navbar navbar-light bg-faded">
-        <a class="navbar-brand" href="#">{title}</a>
-        <ul class="nav navbar-nav">
-            {block:HasPages} {block:Pages}
-            <li class="nav-item active">
-                <a class="nav-link" href="{URL}">{Label} <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{URL}">{Label}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{URL}">{Label}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{URL}">{Label}</a>
-            </li>
-            {/block:Pages} {/block:HasPages}
-        </ul>
-        <form class="form-inline navbar-form pull-right" action="/search" method="get">
-            <input class="form-control" type="text" name="query" placeholder="Search" value="{SearchQuery}">
-            <!-- <button class="btn btn-success-outline" type="submit">Search</button> -->
-            <input class="btn btn-success-outline" type="submit" value="{lang:Search}" />
-        </form>
-    </nav>
-    <!-- search form -->
-    <div class="jumbotron cover">
-        <div class="title-box rotated-351-degrees">
-            <div class="futura-cursive-title">{Title}</div>
+
+<div id="wrapper">
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+
+      <aside>
+      <h2 class="rotated-351-degrees">Last FM</h2>
+        <!-- Start of last.fm discs  -->
+        <div id="lastfm">
+          <div id="lastfmrecords">
+          </div>
         </div>
-        {block:Description}
-        <p id="description">{Description}</p>
-        {/block:Description}
-    </div>
-</header>
+      </aside>
+  </div>
+  <!-- /#sidebar-wrapper -->
 
-<section class="posts {TagsAsClasses}">
+  <!-- Main content -->
 
-    <div class="card-columns">
-    {block:Posts}
+  <div id="main-content">
+    <header>
+        <!-- navbar -->
+        <nav class="navbar navbar-light bg-faded">
+            <a class="navbar-brand" href="#">{title}</a>
+            <ul class="nav navbar-nav">
+                {block:HasPages} {block:Pages}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{URL}">{Label} <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{URL}">{Label}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{URL}">{Label}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{URL}">{Label}</a>
+                </li>
+                {/block:Pages} {/block:HasPages}
+            </ul>
+            <form class="form-inline navbar-form pull-right" action="/search" method="get">
+                <input class="form-control" type="text" name="query" placeholder="Search" value="{SearchQuery}">
+                <!-- <button class="btn btn-success-outline" type="submit">Search</button> -->
+                <input class="btn btn-success-outline" type="submit" value="{lang:Search}" />
+            </form>
+            <a href="#activate-sidebar" class="btn btn-default" id="activate-sidebar">Toggle Menu</a>
 
-    <article>
-      <div class="rotated-351-degrees">
-        <p class="futura-cursive-subtitle">{Date}{PostType}</p>
-      </div>
-        {block:Text}
-        <!-- card  -->
-        <div class="card">
-            <div class="post card-block text">
-                {block:Title}
-                <h3><a href="{Permalink}">{Title}</a></h3>
-                {/block:Title}
-
-                <p class="card-text">{Body}</p>
-
+        </nav>
+        <!-- search form -->
+        <div class="jumbotron cover">
+            <div class="title-box rotated-351-degrees">
+                <div class="futura-cursive-title">{Title}</div>
             </div>
-        </div><!-- end card -->
-        {/block:Text}
-
-        {block:Photo}
-        <!-- card  -->
-        <div class="card">
-        <div class="post card-block photo">
-            <img src="{PhotoURL-500}" alt="{PhotoAlt}" class="img-fluid img-rounded " /> {block:Caption}
-            <div class="caption">{Caption}</div>
-            {/block:Caption}
-        </div>
-        </div><!-- end card -->
-        {/block:Photo}
-
-        {block:Panorama}
-
-        <!-- card  -->
-        <div class="card">
-        <div class="post card-block panorama">
-            {LinkOpenTag}
-            <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}" />{LinkCloseTag} {block:Caption}
-            <div class="caption">{Caption}</div>
-            {/block:Caption}
-        </div>
-        </div><!-- end card -->
-        {/block:Panorama}
-
-        {block:Photoset}
-        <!-- card  -->
-        <div class="card">
-        <div class="post card-block photoset">
-            {Photoset-500} {block:Caption}
-            <div class="caption">{Caption}</div>
-            {/block:Caption}
-        </div>
-        </div><!-- end card -->
-        {/block:Photoset}
-
-        {block:Quote}
-        <!-- card  -->
-        <div class="card">
-        <div class="post card-block quote">
-            &#8220;{Quote}&#8221; {block:Source}
-            <div class="source">{Source}</div>
-            {/block:Source}
-        </div>
-        </div><!-- end card -->
-        {/block:Quote}
-
-        {block:Link}
-        <!-- card  -->
-        <div class="card">
-        <div class="post card-block link">
-            <a href="{URL}" class="link" {Target}>{Name}</a> {block:Description}
-            <div class="description">{Description}</div>
+            {block:Description}
+            <p id="description">{Description}</p>
             {/block:Description}
         </div>
-        </div><!-- end card -->
-        {/block:Link}
+    </header>
+    <section class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+              {block:Description}
+                <p>{Description} <code>#HASHTAG</code></p>
+              {/block:Description}
+            </div>
+        </div>
+    </section><!-- end container-fluid -->
 
-        {block:Chat}
-        <!-- card  -->
-        <div class="card">
-        <div class="post card-block chat">
-            {block:Title}
-            <h3><a href="{Permalink}">{Title}</a></h3> {/block:Title}
-            <ul class="chat">
-                {block:Lines}
-                <li class="{Alt} user_{UserNumber}">
-                    {block:Label}
-                    <span class="label">{Label}</span> {/block:Label} {Line}
-                </li>
-                {/block:Lines}
+    <section class="posts {TagsAsClasses}">
+
+      <div class="card-columns">
+        {block:Posts}
+
+        <article>
+          <div class="rotated-351-degrees">
+            <p class="futura-cursive-subtitle">{Date}{PostType}</p>
+          </div>
+            {block:Text}
+            <!-- card  -->
+            <div class="card">
+                <div class="post card-block text">
+                    {block:Title}
+                    <h3><a href="{Permalink}">{Title}</a></h3>
+                    {/block:Title}
+
+                    <p class="card-text">{Body}</p>
+
+                </div>
+            </div><!-- end card -->
+            {/block:Text}
+
+            {block:Photo}
+            <!-- card  -->
+            <div class="card">
+            <div class="post card-block photo">
+                <img src="{PhotoURL-500}" alt="{PhotoAlt}" class="img-fluid img-rounded " /> {block:Caption}
+                <div class="caption">{Caption}</div>
+                {/block:Caption}
+            </div>
+            </div><!-- end card -->
+            {/block:Photo}
+
+            {block:Panorama}
+
+            <!-- card  -->
+            <div class="card">
+            <div class="post card-block panorama">
+                {LinkOpenTag}
+                <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}" />{LinkCloseTag} {block:Caption}
+                <div class="caption">{Caption}</div>
+                {/block:Caption}
+            </div>
+            </div><!-- end card -->
+            {/block:Panorama}
+
+            {block:Photoset}
+            <!-- card  -->
+            <div class="card">
+            <div class="post card-block photoset">
+                {Photoset-500} {block:Caption}
+                <div class="caption">{Caption}</div>
+                {/block:Caption}
+            </div>
+            </div><!-- end card -->
+            {/block:Photoset}
+
+            {block:Quote}
+            <!-- card  -->
+            <div class="card">
+            <div class="post card-block quote">
+                &#8220;{Quote}&#8221; {block:Source}
+                <div class="source">{Source}</div>
+                {/block:Source}
+            </div>
+            </div><!-- end card -->
+            {/block:Quote}
+
+            {block:Link}
+            <!-- card  -->
+            <div class="card">
+            <div class="post card-block link">
+                <a href="{URL}" class="link" {Target}>{Name}</a> {block:Description}
+                <div class="description">{Description}</div>
+                {/block:Description}
+            </div>
+            </div><!-- end card -->
+            {/block:Link}
+
+            {block:Chat}
+            <!-- card  -->
+            <div class="card">
+            <div class="post card-block chat">
+                {block:Title}
+                <h3><a href="{Permalink}">{Title}</a></h3> {/block:Title}
+                <ul class="chat">
+                    {block:Lines}
+                    <li class="{Alt} user_{UserNumber}">
+                        {block:Label}
+                        <span class="label">{Label}</span> {/block:Label} {Line}
+                    </li>
+                    {/block:Lines}
+                </ul>
+            </div>
+            </div><!-- end card -->
+            {/block:Chat}
+
+            {block:Video}
+            <!-- card  -->
+            <div class="card">
+            <div class="post card-block video" class="img-fluid img-rounded ">
+                {Video-500} {block:Caption}
+                <div class="caption">{Caption}</div>
+                {/block:Caption}
+            </div>
+            </div><!-- end card -->
+            {/block:Video}
+
+            {block:Audio}
+            <!-- card  -->
+            <div class="card">
+            <div class="post card-block audio">
+                {AudioEmbed} {block:AudioPlayer}{AudioPlayer}{/block:AudioPlayer} {block:Caption}
+                <div class="caption">{Caption}</div>
+                {/block:Caption} {block:PlayCount}
+                <span class="play-count">{PlayCountWithLabel}</span> {/block:PlayCount}
+            </div>
+            </div><!-- end card -->
+            {/block:Audio}
+
+            {block:Answer}
+            <!-- card  -->
+            <div class="card">
+            <div class="answer">
+                <img src="{AskerPortraitURL-40}">{Asker} {Question} {Answer}
+            </div>
+            </div><!-- end card -->
+            {/block:Answer}
+
+
+            {block:PermalinkPage}
+            {block:HasTags}
+            <ul class="tags">
+                {block:Tags}
+                <li><a href="{TagURL}">{Tag}</a></li>
+                {/block:Tags}
             </ul>
-        </div>
-        </div><!-- end card -->
-        {/block:Chat}
+            {/block:HasTags}
+            <ul class="buttons">
+                <li>{ReblogButton}</li>
+                <li>{LikeButton}</li>
+            </ul>
+            {block:PostNotes}
+            <div class="notes">
+                {PostNotes}
+            </div>
+            {/block:PostNotes}
+            {/block:PermalinkPage}
+            {block:TagPage}
+            <h2>Posts tagged "{Tag}"</h2>
+            {/block:TagPage}
+        </article>
+        {/block:Posts}
+      </div> <!-- end card-columns -->
 
-        {block:Video}
-        <!-- card  -->
-        <div class="card">
-        <div class="post card-block video">
-            {Video-500} {block:Caption}
-            <div class="caption">{Caption}</div>
-            {/block:Caption}
-        </div>
-        </div><!-- end card -->
-        {/block:Video}
+    </section>
 
-        {block:Audio}
-        <!-- card  -->
-        <div class="card">
-        <div class="post card-block audio">
-            {AudioEmbed} {block:AudioPlayer}{AudioPlayer}{/block:AudioPlayer} {block:Caption}
-            <div class="caption">{Caption}</div>
-            {/block:Caption} {block:PlayCount}
-            <span class="play-count">{PlayCountWithLabel}</span> {/block:PlayCount}
-        </div>
-        </div><!-- end card -->
-        {/block:Audio}
-
-        {block:Answer}
-        <!-- card  -->
-        <div class="card">
-        <div class="answer">
-            <img src="{AskerPortraitURL-40}">{Asker} {Question} {Answer}
-        </div>
-        </div><!-- end card -->
-        {/block:Answer}
-
-
-        {block:PermalinkPage}
-        {block:HasTags}
-        <ul class="tags">
-            {block:Tags}
-            <li><a href="{TagURL}">{Tag}</a></li>
-            {/block:Tags}
+    <footer>
+        <ul>
+            {block:PreviousPage}
+            <li><a href="{PreviousPage}">&#171; Previous</a></li>
+            {/block:PreviousPage} {block:NextPage}
+            <li><a href="{NextPage}">Next &#187;</a></li>
+            {/block:NextPage}
+            <li><a href="/archive">Archive</a></li>
         </ul>
-        {/block:HasTags}
-        <ul class="buttons">
-            <li>{ReblogButton}</li>
-            <li>{LikeButton}</li>
-        </ul>
-        {block:PostNotes}
-        <div class="notes">
-            {PostNotes}
-        </div>
-        {/block:PostNotes}
-        {/block:PermalinkPage}
-        {block:TagPage}
-        <h2>Posts tagged "{Tag}"</h2>
-        {/block:TagPage}
-    </article>
-    {/block:Posts}
-    </div> <!-- end card-columns -->
 
-</section>
-<aside>
-  <!-- Start of last.fm discs  -->
-  <div id="lastfm">
-    <div id="lastfmrecords">
-    </div>
-  </div>
-</aside>
-<footer>
-    <ul>
-        {block:PreviousPage}
-        <li><a href="{PreviousPage}">&#171; Previous</a></li>
-        {/block:PreviousPage} {block:NextPage}
-        <li><a href="{NextPage}">Next &#187;</a></li>
-        {/block:NextPage}
-        <li><a href="/archive">Archive</a></li>
-    </ul>
-</footer>
+        <span class="text-center">
+          {CopyrightYears}
+        </span>
+    </footer>
+  </div><!-- end #main-content -->
 
+</div>
+<!-- /#wrapper -->
 
     {block:IfGoogleAnalyticsID}
     <script>
@@ -497,6 +606,14 @@
     };
    lastFmRecords.init(_config);
    });
+  </script>
+
+  <!--  activate side bar -->
+  <script>
+  $("#activate-sidebar").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("sidebar-activated");
+  });
   </script>
 </body>
 
