@@ -23,4 +23,4 @@ Powered by: [Bootstrap](http://getbootstrap.com/) version 4
 
 ## Copyright and License
 
-Copyright 2016 Mario PAntoja. Code released under the [MIT](https://github.com/marioandrei/351degrees/blob/master/LICENSE) license.
+Copyright 2016 Mario Andrei Pantoja Maguiña. Code released under the [MIT](https://github.com/marioandrei/351degrees/blob/master/LICENSE) license.
