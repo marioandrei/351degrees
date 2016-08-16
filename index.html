@@ -24,8 +24,9 @@
     <meta name="description" content="{MetaDescription}" />
     <!-- {/block:Description} -->
 
-    <!-- Custom google webfonts -->
-    <link href='http://fonts.googleapis.com/css?family={text:Google Web Font name}' rel='stylesheet' type='text/css'>
+    <!-- Custom google webfonts - default should be Open Sans and Playfair Display-->
+    <link href='http://fonts.googleapis.com/css?family={text:Google Web Font name Sans Serif}' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family={text:Google Web Font name Serif}' rel='stylesheet' type='text/css'>
     <!-- <link rel="stylesheet" href="http://www.tumblr.com/themes/css_static_file.css" type="text/css" media="all" >-->
 
     <!-- bootstrap 4! -->
@@ -87,7 +88,14 @@
           font-weight: bold;
           color: rgb(240,230,0);
         }
-
+        .futura-cursive-subtitle{
+          font-family: Futura, sans-serif;
+          text-transform: uppercase;
+          //font-size: 10rem;
+          font-style: italic;
+          font-weight: bold;
+          color: rgb(240,230,0);
+        }
 
         .futura-cursive-subtitle{
           font-family: Futura, sans-serif;
@@ -341,6 +349,37 @@
                 margin-right: 0;
             }
         }
+
+
+
+        /* video posts */
+
+        /* thanks Allison House http://allisonhouse.tumblr.com/post/11145596753/tumblr-themes-how-to-add-fluid-width-video*/
+        .video {
+          position: relative;
+          padding-bottom: 75%;
+          height: 0;
+          overflow: hidden;
+
+          -moz-border-radius: 8px;
+          -webkit-border-radius: 8px;
+          -o-border-radius: 8px;
+          -ms-border-radius: 8px;
+          -khtml-border-radius: 8px;
+          border-radius: 8px;
+
+          margin: 8px;
+        }
+
+        .video iframe, 
+        .video object, 
+        .video embed {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          }
     </style>
 </head>
 
@@ -357,7 +396,7 @@
     </section>
 
       <aside>
-        <h2 class="rotated-351-degrees">Last FM</h2>
+        <h2 class="rotated-351-degrees futura-cursive-subtitle">Last FM</h2>
         <!-- Start of last.fm discs  -->
         <div id="lastfm">
           <div id="lastfmrecords">
